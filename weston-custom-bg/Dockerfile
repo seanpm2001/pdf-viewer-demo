@@ -4,7 +4,7 @@ ARG IMAGE_TAG=2
 
 FROM --platform=$IMAGE_ARCH torizon/$BASE_IMAGE:$IMAGE_TAG
 
-COPY background.png /usr/share/background.png
+COPY blog_banner.png /usr/share/background.png
 
 COPY weston.ini /weston.ini
 
