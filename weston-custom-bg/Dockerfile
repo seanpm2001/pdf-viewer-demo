@@ -11,13 +11,3 @@ COPY weston.ini /weston.ini
 RUN cat /weston.ini >> /etc/xdg/weston-dev/weston.ini
 
 RUN rm /weston.ini
-
-RUN apt-get -y update && apt-get install -y --no-install-recommends \
-    evince \
-    && apt-get clean && apt-get autoremove && rm -rf /var/lib/apt/lists/*
-
-COPY presentation.pdf /home/torizon/presentation.pdf
-
-WORKDIR /home/torizon
-
-ENTRYPOINT ["/usr/bin/entry.sh"]

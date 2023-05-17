@@ -1,7 +1,7 @@
 services:
   pdfviewer:
     user: torizon
-    command: evince --presentation presentation.pdf
+      #command: evince --presentation presentation.pdf
     depends_on:
       weston:
         condition: service_started
@@ -14,7 +14,7 @@ services:
     environment:
       ACCEPT_FSL_EULA: '1'
     #image: torizon/weston-vivante@sha256:c9c846118538dee213cd740602796ca1a4eb73c5a2d6505659ce37932e40966d
-    image: weston-custom-bg:dev
+    image: presentation-app:1.0.0
     volumes:
     - source: /tmp
       target: /tmp
@@ -38,7 +38,7 @@ services:
     environment:
       ACCEPT_FSL_EULA: '1'
     #image: torizon/weston-vivante:$CT_TAG_WESTON_VIVANTE
-    image: weston-custom-bg:dev
+    image: weston-custom-bg:1.0.0
     network_mode: host
     volumes:
     - source: /tmp
