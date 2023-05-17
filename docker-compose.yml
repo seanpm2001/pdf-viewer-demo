@@ -1,7 +1,7 @@
 services:
   pdfviewer:
     user: torizon
-    command: evince presentation.pdf
+    command: evince --presentation presentation.pdf
     depends_on:
       weston:
         condition: service_started
