@@ -1,5 +1,5 @@
 ARG IMAGE_ARCH=linux/arm64
-ARG BASE_IMAGE=weston-vivante
+ARG BASE_IMAGE=wayland-base-vivante
 ARG IMAGE_TAG=2
 
 FROM --platform=$IMAGE_ARCH torizon/$BASE_IMAGE:$IMAGE_TAG
