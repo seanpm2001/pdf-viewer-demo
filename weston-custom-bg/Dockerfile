@@ -10,4 +10,6 @@ COPY weston.ini /weston.ini
 
 RUN cat /weston.ini >> /etc/xdg/weston-dev/weston.ini
 
+RUN cp -f /etc/xdg/weston-dev/weston.ini /etc/xdg/weston/
+
 RUN rm /weston.ini
