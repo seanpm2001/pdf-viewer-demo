@@ -1,28 +1,51 @@
 version: "2.4"
+
+# Declare the containers and their configuration
 services:
+
+  # PDF viewer container application
   pdfviewer:
+
+    # Launch the container 
     user: torizon
     depends_on:
     - weston
     image: carlosmelara/presentation-app:1.3.0
     volumes:
+    # mount /tmp so our aplication can use a socket to communicate with wayland
     - source: /tmp
       target: /tmp
       type: bind
+
+  # Graphical window manager for wayland
   weston:
-    cap_add:
-    - CAP_SYS_TTY_CONFIG
+    # Add --developer flag to weston so we get a navigation bar. If you're not
+    # interested in this feature and in a custom background, remove this option
+    # and change the image field to torizon/weston-vivante:2
     command: --developer
-    device_cgroup_rules:
-    - c 4:0 rmw
-    - c 4:7 rmw
-    - c 13:* rmw
-    - c 199:* rmw
-    - c 226:* rmw
-    environment:
-      ACCEPT_FSL_EULA: '1'
     image: carlosmelara/weston-custom-bg:1.3.0
     restart: always
+
+    # Pass environment variables to the container in this example, you accept
+    # the NXP EULA with regards to use of Vivante binaries for GPU-accelerated
+    # graphics
+    environment:
+      ACCEPT_FSL_EULA: '1'
+
+    # Add device access rights through cgroup rules
+    device_cgroup_rules:
+    # ... for tty0
+    - c 4:0 rmw
+    # ... for tty7
+    - c 4:7 rmw
+    # ... for /dev/input devices
+    - c 13:* rmw
+    # ... for /dev/input devices
+    - c 199:* rmw
+    # ... for /dev/input devices
+    - c 226:* rmw
+
+    # Required to get udev events from host udevd via netlink
     network_mode: host
     volumes:
     - source: /tmp
@@ -34,3 +57,5 @@ services:
     - source: /run/udev
       target: /run/udev
       type: bind
+    cap_add:
+    - CAP_SYS_TTY_CONFIG
