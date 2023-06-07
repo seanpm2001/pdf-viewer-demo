@@ -52,6 +52,19 @@ If you want to automatically start the pdf viewer on boot, you can copy
 - [How to Autorun an Application With TorizonCore](https://developer.toradex.com/torizon/application-development/how-to-autorun-an-application-with-torizoncore)
 - [Torizon Best Practices Guide - Sharing a Pluggable Device](https://developer.toradex.com/torizon/torizoncore/best-practices/torizon-best-practices-guide/#sharing-a-pluggable-device)
 
+## Additional Information
+The initial demo was constructed to showcase our product and its potential in a
+conference (MiniDebConf Brasília 2023), so it has some different aspects than
+one might want. For example, we set a custom background image to show to
+the audience we are running Debian. We also set a 5 seconds sleep before
+launching the application to emphasize the last point. We use the --developer
+option to have a navigation bar and a easy way to launch a terminal, this was
+done so we could show it as a demo in the end of the talk. Regardless of these
+aspects, the demo still brings important aspects like how to launch a
+slideshow in fullscreen mode, how to run it automatically after boot, how to
+customize weston to one own needs, how to use a multi-container setup with
+docker compose, etc.
+
 ## Authors and acknowledgment
 This demo was developed by Carlos Henrique Lima Melara with the help of many
 other colleagues (thank you all)!
