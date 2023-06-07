@@ -10,8 +10,8 @@ In this example you will learn:
 - How to launch the pdf viewer automatically after boot.
 
 ## Requirements
-- Toradex SoM;
-- Carrier Board with HDMI connector;
+- Apalis iMX8 Toradex SoM;
+- Ixora Carrier Board;
 - Display, TV or projector.
 
 ## Overview
