@@ -1,0 +1,64 @@
+image: docker:latest
+
+variables:
+  PRESENTATION_APP_FOLDER: "presentation-app"
+  WESTON_CUSTOM_BG_FOLDER: "weston-custom-bg"
+
+services:
+  - name: docker:dind
+
+.do_print_environment_variables: &do_print_environment_variables
+  - echo "GitLab CI/CD environment variables:"
+  - env
+
+# images have dependencies between them with the `needs` keyword so we
+# have faster builds and the nice graph showing the relation between
+# containers that gitlab plots in the ci/cd runs view. So these stages
+# are nothing more than a way to visually arrange jobs. They are *not*
+# used to order jobs.
+stages:
+  - build
+
+# Enable experimental features in Docker client (experimental feature are needed for manifest)
+.do_docker_experimental: &do_docker_experimental
+    - mkdir -p $HOME/.docker
+    - "echo -e '{\n  \"experimental\": \"true\"\n}' | tee $HOME/.docker/config.json"
+    - docker version
+
+# Docker image builds
+#
+# Build the Docker images specificd in project/$DOCKERFILE_FOLDER/ and push
+# it to Gitlab's internal Docker registry
+.docker-build:
+  script:
+  - *do_docker_experimental  
+  - *do_print_environment_variables
+  - export IMAGE_TAG="${MAJOR}${RELEASE_APPEND}"
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  - docker info
+  - export DATE=$(date +%Y%m%d)
+  - docker buildx create --name multiarch-builder --driver docker-container --platform linux/armv7,linux/arm/v8,linux/amd64 --use
+  # Ignore error "sh: write error: File exists" when installing qemu-user-static
+  - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes || true
+  - docker buildx build --push --platform linux/arm64
+                  -f ${DOCKERFILE_FOLDER}/Dockerfile
+                  -t ${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:latest
+                  ${DOCKERFILE_FOLDER}
+
+docker-build-presentation-app:
+  extends: .docker-build
+  before_script:
+    - export DOCKER_BASE_TAG="${DEBIAN_MAJOR}-${DEBIAN_RELEASE}"
+  variables:
+    IMAGE_NAME: presentation-app
+    DOCKERFILE_FOLDER: "${PRESENTATION_APP_FOLDER}/"
+  stage: build
+
+docker-build-weston-custom-bg:
+  extends: .docker-build
+  before_script:
+    - export DOCKER_BASE_TAG="${DEBIAN_MAJOR}-${DEBIAN_RELEASE}"
+  variables:
+    IMAGE_NAME: weston-custom-bg
+    DOCKERFILE_FOLDER: "${WESTON_CUSTOM_BG_FOLDER}/"
+  stage: build
