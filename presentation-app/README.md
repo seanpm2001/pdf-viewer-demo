@@ -14,7 +14,7 @@ Each file has comments to indicate what the instructions are doing and how you
 can customize it to your needs. If you encounter a problem or have a
 suggestion, please contact us and/or open a new issue or merge request.
 
-## TLDR
+## TL;DR
 If you just want to present your slideshow, substitute `presentation.pdf` with
 your file, but keep the same filename! Then build the container image and push
 to your docker registry (also update it in the `docker-compose.yml` file).

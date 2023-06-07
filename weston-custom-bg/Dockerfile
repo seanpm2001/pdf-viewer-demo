@@ -13,16 +13,17 @@ ARG IMAGE_TAG=2
 # Set the base image to build upon it
 FROM --platform=$IMAGE_ARCH torizon/$BASE_IMAGE:$IMAGE_TAG
 
-# Copy the custom background file to our image
+# Copy the custom background file to our container image
 COPY homeworld_crop_red.jpg /usr/share/background.jpg
 
-# Copy the configuration to be appended to weston.ini to our image
+# Copy the configuration to be appended to weston.ini of our container image
 COPY weston.ini /weston.ini
 
-# Append our custom config to weston.ini (--developer flag set)
+# Append our custom config to weston.ini. When --developer flag is set, weston
+# uses the weston-dev/ folder, otherwise it uses weston/
 RUN cat /weston.ini >> /etc/xdg/weston-dev/weston.ini
 
-# Use the same config to normal weston config
+# Use the same config to default weston
 RUN cp -f /etc/xdg/weston-dev/weston.ini /etc/xdg/weston/
 
 # Clean up the image

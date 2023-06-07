@@ -15,17 +15,17 @@ FROM --platform=$IMAGE_ARCH torizon/$BASE_IMAGE:$IMAGE_TAG
 
 # Install our pdf viewer application
 RUN apt-get -y update && apt-get install -y --no-install-recommends \
-    evince \
+        evince \
     && apt-get clean && apt-get autoremove && rm -rf /var/lib/apt/lists/*
 
-# Copy the presentation to our image
+# Copy the presentation to our container image
 COPY presentation.pdf /home/torizon/presentation.pdf
 
-# Copy the startup script to our image
+# Copy the startup script to our container image
 COPY start-presentation.sh /home/torizon/start-presentation.sh
 
 # Make sure we are in the correct folder before launching the presentation
 WORKDIR /home/torizon
 
-# Run the script as the default operation
+# Run the script as the default startup operation
 ENTRYPOINT ./start-presentation.sh
