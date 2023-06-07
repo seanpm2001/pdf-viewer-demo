@@ -6,7 +6,7 @@ services:
   # PDF viewer container application
   pdfviewer:
 
-    # Launch the container 
+    # Launch the container and execute the scripts as torizon
     user: torizon
     depends_on:
     - weston
@@ -40,9 +40,9 @@ services:
     - c 4:7 rmw
     # ... for /dev/input devices
     - c 13:* rmw
-    # ... for /dev/input devices
+    # ... for /dev/dri devices
     - c 199:* rmw
-    # ... for /dev/input devices
+    # ... for /dev/galcore device on i.MX8
     - c 226:* rmw
 
     # Required to get udev events from host udevd via netlink
