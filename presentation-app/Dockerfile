@@ -5,10 +5,9 @@ ARG IMAGE_ARCH=linux/arm64
 # And to use GPU hardware acceleration, we have to use the -vivante container
 # variant. If you want try with other SoM's, use only wayland-base here.
 ARG BASE_IMAGE=wayland-base-vivante
-# For compatibility with TorizonCore 5.x.y, we are using bullseye based
-# containers, hence the 2 tag. For bookworm based ones, check out the bookworm
-# branch/tag of this repository.
-ARG IMAGE_TAG=2
+# The IMAGE_TAG=3 indicates we are using bookworm based containers. For
+# bullseye based ones, check out the bullseye branch/tag of this repository.
+ARG IMAGE_TAG=3
 
 # Set the base image to build upon it
 FROM --platform=$IMAGE_ARCH torizon/$BASE_IMAGE:$IMAGE_TAG
