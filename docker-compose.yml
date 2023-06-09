@@ -10,7 +10,7 @@ services:
     user: torizon
     depends_on:
     - weston
-    image: carlosmelara/presentation-app:1.3.0
+    image: torizonextras/presentation-app:1.0.0
 
     # mount /tmp so our aplication can use a socket to communicate with wayland
     volumes:
@@ -25,7 +25,7 @@ services:
     # interested in this feature and in a custom background, remove this option
     # and change the image field to torizon/weston-vivante:2
     command: --developer
-    image: carlosmelara/weston-custom-bg:1.3.0
+    image: torizonextras/weston-custom-bg:1.0.0
     restart: always
 
     # Pass environment variables to the container in this example, you accept
