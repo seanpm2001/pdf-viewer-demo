@@ -19,10 +19,10 @@ This project contains 2 folders, each of then corresponds to one container
 image that will be generated and used.
 
 - The `presentation-app` folder contains the instructions to build a container
-image which will display a slideshow (or any pdf) in the screen.
+  image which will display a slideshow (or any pdf) in the screen.
 - The `weston-custom-bg` folder contains the instructions to build a custom weston
-image, allowing one to set a custom background image, setting additional weston
-configuration, etc.
+  image, allowing one to set a custom background image, setting additional weston
+  configuration, etc.
 
 For a detailed description about each image, check out the instructions in the
 folder's README.
