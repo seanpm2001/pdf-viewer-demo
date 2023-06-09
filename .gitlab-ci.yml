@@ -3,6 +3,8 @@ image: docker:latest
 variables:
   PRESENTATION_APP_FOLDER: "presentation-app"
   WESTON_CUSTOM_BG_FOLDER: "weston-custom-bg"
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_TLS_CERTDIR: ""
 
 services:
   - name: docker:dind
