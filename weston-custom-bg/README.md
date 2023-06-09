@@ -7,7 +7,7 @@ find an explanation of each component.
 This folder contains 3 important files, namely:
 - `Dockerfile`: contains the instructions to build the container image;
 - `weston.ini`: contains the configuration to be appended to weston's config;
-- `homeworld_crop_red.jpg`: the file which will be set as background image.
+- `homeworld_desktop.png`: the file which will be set as background image.
 
 Each file has comments to indicate what the instructions are doing and how you
 can customize it to your needs. If you encounter a problem or have a
@@ -15,7 +15,7 @@ suggestion, please contact us and/or open a new issue or merge request.
 
 ## TL;DR
 If you just want to configure weston with your custom background image,
-substitute `homeworld_crop_red.jpg` with your custom background file, but keep
+substitute `homeworld_desktop.png` with your custom background file, but keep
 the same filename! Then build the container image and push to your docker
 registry (also update it in the `docker-compose.yml` file).
 
