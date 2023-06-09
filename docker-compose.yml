@@ -6,11 +6,12 @@ services:
   # PDF viewer container application
   pdfviewer:
 
-    # Launch the container and execute the scripts as torizon
-    user: torizon
+    image: torizonextras/presentation-app:2.0.0
+
+    # We need the wayland window manager up before we launch an application
+    # using it. Hence the dependency declaration
     depends_on:
     - weston
-    image: torizonextras/presentation-app:1.0.0
 
     # mount /tmp so our aplication can use a socket to communicate with wayland
     volumes:
@@ -23,9 +24,9 @@ services:
 
     # Add --developer flag to weston so we get a navigation bar. If you're not
     # interested in this feature and in a custom background, remove this option
-    # and change the image field to torizon/weston-vivante:2
+    # and change the image field to torizon/weston-vivante:3
     command: --developer
-    image: torizonextras/weston-custom-bg:1.0.0
+    image: torizonextras/weston-custom-bg:2.0.0
     restart: always
 
     # Pass environment variables to the container in this example, you accept
@@ -38,6 +39,8 @@ services:
     device_cgroup_rules:
     # ... for tty0
     - c 4:0 rmw
+    # ... for tty1
+    - c 4:1 rmw
     # ... for tty7
     - c 4:7 rmw
     # ... for /dev/input devices
